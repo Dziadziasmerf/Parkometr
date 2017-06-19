@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+<h:body>
+    <ui:composition template="./template.xhtml">
+        <ui:define name="content">
+            <p:panel header="#{msg['menu.districts']}">
+                <p:dataTable var="district" value="#{districtManager.districts}">
+
+                    <p:column headerText="#{msg['table.id']}">
+                        <h:outputText value="#{district.id}"/>
+                    </p:column>
+                    <p:column headerText="#{msg['table.name']}">
+                        <h:outputText value="#{district.name}"/>
+                    </p:column>
+                    <p:column style="text-align: center;" headerText="#{msg['table.operations']}">
+                        <h:form>
+                            <h:commandButton style="margin-right: 10px" value="#{msg['button.delete']}"
+                                             action="#{districtManager.deleteDistrict(district)}"/>
+                            <h:commandButton value="#{msg['button.edit']}" action="district-edit">
+                                <f:actionListener binding="#{districtManager.setDistrict(district)}"/>
+                            </h:commandButton>
+                        </h:form>
+                    </p:column>
+                </p:dataTable>
+                <h:form style="margin-top: 30px" rendered="#{request.isUserInRole('Admin')}">
+                    #{msg['district.name']} :
+                    <h:inputText styleClass="form" value="#{districtManager.districtName}"/>
+                    <h:commandButton styleClass="form" value="#{msg['button.add']}"
+                                     action="#{districtManager.addDistrict}"/>
+                </h:form>
+            </p:panel>
+        </ui:define>
+    </ui:composition>
+</h:body>
+</html>

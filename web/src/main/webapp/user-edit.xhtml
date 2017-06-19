@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:body>
+    <ui:composition template="./template.xhtml">
+        <ui:define name="content">
+            <h:form style="margin-left: 40%">
+                #{msg['user.name']}:
+                <h:inputText styleClass="form" value="#{users.userLogin}" />
+                #{msg['user.password']}:
+                <h:inputSecret styleClass="form" value="#{users.userPassword}" />
+                #{msg['password.repeat']}:
+                <h:inputSecret styleClass="form" value="#{users.repeatedUserPassword}" />
+                #{msg['user.role']}
+                <h:selectManyListbox styleClass="form" value="#{users.roles}">
+                    <f:selectItems value="#{users.availableItems}" />
+                </h:selectManyListbox>
+                <h:commandButton styleClass="form" value="#{msg['button.save']}" action="#{users.sendUser}" />
+                <h:outputText styleClass="form" value="#{users.output}" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+</h:body>
+</html>

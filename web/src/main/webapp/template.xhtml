@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+<h:head>
+    <meta http-equiv="Content-Type"
+          content="text/html; charset=UTF-8"/>
+
+    <style type="text/css">
+        .form{
+            display: block;
+            margin-bottom: 10px;
+        }
+    </style>
+</h:head>
+
+<h:body>
+    <h:form>
+        <p:growl id="messages"/>
+        <p:menubar>
+            <p:menuitem value="#{msg['menu.districts']}" url="districts.xhtml"/>
+            <p:menuitem value="#{msg['menu.users']}" url="users.xhtml" rendered="#{request.isUserInRole('Admin')}"/>
+            <p:menuitem value="#{msg['menu.password']}" url="password.xhtml"/>
+            <p:menuitem value="#{msg['menu.notifications']}" url="messages.xhtml"/>
+            <p:menuitem value="#{msg['menu.report']}" url="report.xhtml"/>
+            <p:menuitem value="#{msg['menu.logout']}" icon="ui-icon-extlink" action="#{logout.logout}" rendered="false"/>
+            <p:menuitem><p:selectOneMenu value="#{language.localeCode}" onchange="submit()"
+                                         valueChangeListener="#{language.countryLocaleCodeChanged}">
+                <f:selectItems value="#{language.countriesInMap}"/>
+            </p:selectOneMenu>
+            </p:menuitem>
+        </p:menubar>
+    </h:form>
+    <p:layout style="min-width:400px;min-height: 400px;">
+        <p:layoutUnit position="center">
+            <ui:insert name="content"/>
+        </p:layoutUnit>
+    </p:layout>
+</h:body>
+
+</html>
